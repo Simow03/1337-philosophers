@@ -6,17 +6,23 @@
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 15:38:40 by mstaali           #+#    #+#             */
-/*   Updated: 2024/06/10 18:16:01 by mstaali          ###   ########.fr       */
+/*   Updated: 2024/06/11 20:59:38 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-# include <stdio.h>
-# include <pthread.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <time.h>
+#include <stdio.h>
+#include <pthread.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <limits.h>
+#include <time.h>
+
+#define UNDERLINE "\033[4m"
+#define BOLD "\033[1m"
+#define RED "\033[31m"
+#define DFLT "\033[0m"
 
 typedef struct s_fork
 {
