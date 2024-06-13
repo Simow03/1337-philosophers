@@ -6,7 +6,7 @@
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 15:38:40 by mstaali           #+#    #+#             */
-/*   Updated: 2024/06/13 13:00:27 by mstaali          ###   ########.fr       */
+/*   Updated: 2024/06/13 15:57:00 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <limits.h>
-#include <time.h>
+#include <sys/time.h>
 
 #define UNDERLINE "\033[4m"
 #define BOLD "\033[1m"
@@ -40,6 +40,7 @@ typedef struct s_args
 	long			time_to_eat;
 	long			time_to_sleep;
 	int				nbr_of_meals_to_eat;
+	long			current_time;
 }	t_args;
 
 typedef struct s_philo
@@ -48,6 +49,7 @@ typedef struct s_philo
 	pthread_t		thread;
 	int				philo_id;
 	long			meal_time;
+	long			time_to_die;
 	int				is_eating;
 	int				is_dead;
 	pthread_mutex_t	*left_fork;
@@ -59,6 +61,12 @@ typedef struct s_philo
 int			init_data(t_args *args);
 void		init_forks(t_args *args);
 void		init_philos(t_args *args);
+
+
+
+//-------------------- ROUTINE --------------------//
+int			thread_setup(t_args *args);
+
 
 
 //-------------------- UTILS --------------------//

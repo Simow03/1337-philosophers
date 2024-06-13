@@ -6,7 +6,7 @@
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:13:54 by mstaali           #+#    #+#             */
-/*   Updated: 2024/06/12 16:58:40 by mstaali          ###   ########.fr       */
+/*   Updated: 2024/06/13 16:08:26 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,9 @@ void	extern_error(int flag)
 	else if (flag == 1)
 		printf("\n%s%s%serror:%s%s Failed to create thread.\n\n", BOLD, UNDERLINE, RED, DFLT, BOLD);
 	else if (flag == 2)
-		printf("\n%s%s%serror:%s%s Failed to create mutex.\n\n", BOLD, UNDERLINE, RED, DFLT, BOLD);
+		printf("\n%s%s%serror:%s%s Failed to detach thread.\n\n", BOLD, UNDERLINE, RED, DFLT, BOLD);
+	else if (flag == 3)
+		printf("\n%s%s%serror:%s%s Failed to join thread.\n\n", BOLD, UNDERLINE, RED, DFLT, BOLD);
+	else if (flag == 4)
+		printf("\n%s%s%serror:%s%s Failed to \'gettimeofday()\'.\n\n", BOLD, UNDERLINE, RED, DFLT, BOLD);
 }
