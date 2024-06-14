@@ -6,7 +6,7 @@
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 15:38:40 by mstaali           #+#    #+#             */
-/*   Updated: 2024/06/13 15:57:00 by mstaali          ###   ########.fr       */
+/*   Updated: 2024/06/14 18:15:17 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@
 #define RED "\033[31m"
 #define DFLT "\033[0m"
 
+# define TAKEN_FORK "has taken a fork"
+# define THINKING "is thinking"
+# define SLEEPING "is sleeping"
+# define EATING "is eating"
+# define DIED "died"
+
 typedef struct s_philo t_philo;
 typedef struct s_args t_args;
 
@@ -35,6 +41,8 @@ typedef struct s_args
 	t_philo			*philos;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	lock;
+	pthread_mutex_t	write;
+	int				is_finished;
 	int				nbr_of_philos;
 	long			time_to_die;
 	long			time_to_eat;
@@ -51,6 +59,7 @@ typedef struct s_philo
 	long			meal_time;
 	long			time_to_die;
 	int				is_eating;
+	int				meal_counter;
 	int				is_dead;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
@@ -66,7 +75,7 @@ void		init_philos(t_args *args);
 
 //-------------------- ROUTINE --------------------//
 int			thread_setup(t_args *args);
-
+long		get_curr_time(void);
 
 
 //-------------------- UTILS --------------------//
