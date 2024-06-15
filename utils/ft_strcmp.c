@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   time.c                                             :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/13 15:13:22 by mstaali           #+#    #+#             */
-/*   Updated: 2024/06/15 15:01:39 by mstaali          ###   ########.fr       */
+/*   Created: 2024/06/15 16:14:34 by mstaali           #+#    #+#             */
+/*   Updated: 2024/06/15 16:23:35 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philosophers.h"
+#include <string.h>
 
-long	get_curr_time(void)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	struct timeval	curr_time;
-
-	if (gettimeofday(&curr_time, NULL) != 0)
-		return (extern_error(3), 0);
-	return ((curr_time.tv_sec * 1000) + (curr_time.tv_usec / 1000));
-}
-
-int	ft_usleep(useconds_t time)
-{
-	u_int64_t	start;
-
-	start = get_curr_time();
-	while ((get_curr_time() - start) < time)
-		usleep(time / 10);
-	return (0);
+	if (!s1 || !s2)
+	{
+		if (s1 == NULL && s2 == NULL)
+			return (0);
+		else
+			return (-1);
+	}
+	while (*s1 && *s2)
+	{
+		if (*s1 != *s2)
+			return *s1 - *s2;
+		s1++;
+		s2++;
+	}
+	return (*s1 - *s2);
 }
