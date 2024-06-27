@@ -6,7 +6,7 @@
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 15:38:40 by mstaali           #+#    #+#             */
-/*   Updated: 2024/06/15 17:59:53 by mstaali          ###   ########.fr       */
+/*   Updated: 2024/06/27 20:17:46 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_philo
 	int				philo_id;
 	int				meal_counter;
 	int				is_eating;
+	int				status;
 	long			time_to_die;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;

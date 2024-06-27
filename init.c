@@ -6,7 +6,7 @@
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 18:12:47 by mstaali           #+#    #+#             */
-/*   Updated: 2024/06/15 16:07:51 by mstaali          ###   ########.fr       */
+/*   Updated: 2024/06/27 19:49:03 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,13 @@
 int	init_data(t_args *args)
 {
 	args->philos = malloc(sizeof(t_philo) * args->nbr_of_philos);
+	if (!args->philos)
+		return (extern_error(0), 0);
 	args->forks = malloc(sizeof(pthread_mutex_t) * args->nbr_of_philos);
+	if (!args->forks)
+		return (extern_error(0), 0);
 	args->thread_id = malloc(sizeof(pthread_t) * args->nbr_of_philos);
-	if (!args->philos || !args->thread_id || !args->forks)
+	if (!args->thread_id)
 		return (extern_error(0), 0);
 	args->is_finished = 0;
 	args->is_dead = 0;
@@ -58,6 +62,7 @@ void	init_philos(t_args *args)
 		args->philos[i].time_to_die = args->time_to_die;
 		args->philos[i].meal_counter = 0;
 		args->philos[i].is_eating = 0;
+		args->philos[i].status = 0;
 		pthread_mutex_init(&args->philos[i].lock, NULL);
 	}
 }

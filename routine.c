@@ -6,7 +6,7 @@
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 13:53:44 by mstaali           #+#    #+#             */
-/*   Updated: 2024/06/15 17:59:47 by mstaali          ###   ########.fr       */
+/*   Updated: 2024/06/27 20:18:40 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@ void	print_message(t_philo *philo, char *flag)
 	curr_time = get_curr_time() - philo->args->starting_time;
 	if (ft_strcmp(flag, DIED) == 0 && philo->args->is_dead == 0)
 	{
-		printf("%ld  %d %s\n", curr_time, philo->philo_id, flag);
+		printf("%ld  %d %s%s\n", curr_time, philo->philo_id, RED, flag);
 		philo->args->is_dead = 1;
 	}
 	if (!philo->args->is_dead)
 		printf("%ld  %d %s\n", curr_time, philo->philo_id, flag);
+	pthread_mutex_unlock(&philo->args->write);
 }
 
 void	*single_routine(void *philo_ptr)
@@ -154,5 +155,6 @@ int	thread_setup(t_args *args)
 			if (pthread_join(args->thread_id[i], NULL) != 0)
 				return (extern_error(3), 0);
 	}
+	cleanup(args);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 18:09:39 by mstaali           #+#    #+#             */
-/*   Updated: 2024/06/15 17:59:35 by mstaali          ###   ########.fr       */
+/*   Updated: 2024/06/27 20:07:50 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	main(int ac, char **av)
 			return (EXIT_FAILURE);
 		if (!thread_setup(&args))
 			return (EXIT_FAILURE);
-		cleanup(&args);
 		return (EXIT_SUCCESS);
 	}
 	else
