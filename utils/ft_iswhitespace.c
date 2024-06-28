@@ -6,14 +6,14 @@
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:15:02 by mstaali           #+#    #+#             */
-/*   Updated: 2024/06/12 11:19:50 by mstaali          ###   ########.fr       */
+/*   Updated: 2024/06/28 14:22:22 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philosophers.h"
+#include "../philo.h"
 
-int ft_iswhitespace(int c)
+int	ft_iswhitespace(int c)
 {
-	return (c == ' ' || c == '\t' || c == '\n' || c == '\r' 
+	return (c == ' ' || c == '\t' || c == '\n' || c == '\r'
 		|| c == '\v' || c == '\f');
 }

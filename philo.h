@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.h                                     :+:      :+:    :+:   */
+/*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 15:38:40 by mstaali           #+#    #+#             */
-/*   Updated: 2024/06/27 20:17:46 by mstaali          ###   ########.fr       */
+/*   Updated: 2024/06/28 15:57:24 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#ifndef PHILO_H
+# define PHILO_H
 
-#include <stdio.h>
-#include <pthread.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <limits.h>
-#include <sys/time.h>
+# include <stdio.h>
+# include <pthread.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <limits.h>
+# include <sys/time.h>
 
-#define UNDERLINE "\033[4m"
-#define BOLD "\033[1m"
-#define RED "\033[31m"
-#define DFLT "\033[0m"
+# define UNDERLINE "\033[4m"
+# define BOLD "\033[1m"
+# define RED "\033[31m"
+# define DFLT "\033[0m"
 
 # define TAKEN_FORK "has taken a fork"
 # define THINKING "is thinking"
@@ -30,9 +31,8 @@
 # define EATING "is eating"
 # define DIED "died"
 
-typedef struct s_philo t_philo;
-typedef struct s_args t_args;
-
+typedef struct s_philo	t_philo;
+typedef struct s_args	t_args;
 
 //-------------------- STRUCTS --------------------//
 typedef struct s_args
@@ -71,13 +71,14 @@ int			init_data(t_args *args);
 void		init_forks(t_args *args);
 void		init_philos(t_args *args);
 
-
-
 //-------------------- ROUTINE --------------------//
 int			thread_setup(t_args *args);
 long		get_curr_time(void);
 int			ft_usleep(useconds_t time);
-
+void		*meals_eaten(void	*philo_ptr);
+void		eating_process(t_philo *philo);
+void		print_message(t_philo *philo, char *flag);
+void		cleanup(t_args *args);
 
 //-------------------- UTILS --------------------//
 long int	ft_atol(const char *str);
@@ -88,4 +89,5 @@ void		args_error(void);
 void		nbr_error(const char *str, int flag);
 void		neg_nbr_error(const char *str);
 void		extern_error(int flag);
-void	cleanup(t_args *args);
+
+#endif

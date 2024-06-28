@@ -6,11 +6,11 @@
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:15:56 by mstaali           #+#    #+#             */
-/*   Updated: 2024/06/12 11:18:23 by mstaali          ###   ########.fr       */
+/*   Updated: 2024/06/28 14:15:55 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philosophers.h"
+#include "../philo.h"
 
 int	ft_isdigit(int c)
 {

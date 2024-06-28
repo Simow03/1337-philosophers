@@ -6,11 +6,11 @@
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 18:09:39 by mstaali           #+#    #+#             */
-/*   Updated: 2024/06/27 20:07:50 by mstaali          ###   ########.fr       */
+/*   Updated: 2024/06/28 15:46:53 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philo.h"
 
 void	get_args(t_args *args, char **av)
 {
@@ -24,11 +24,12 @@ void	get_args(t_args *args, char **av)
 		args->nbr_of_meals_to_eat = -2;
 }
 
-int is_valid_args(t_args *args)
+int	is_valid_args(t_args *args)
 {
-	if (args->nbr_of_philos == -1 || args->nbr_of_philos == 0 || args->time_to_die == -1 || args->time_to_eat == -1 ||
-		args->time_to_sleep == -1 || args->nbr_of_meals_to_eat == -1)
-			return (0);
+	if (args->nbr_of_philos == -1 || args->nbr_of_philos == 0
+		|| args->time_to_die == -1 || args->time_to_eat == -1
+		|| args->time_to_sleep == -1 || args->nbr_of_meals_to_eat == -1)
+		return (0);
 	return (1);
 }
 

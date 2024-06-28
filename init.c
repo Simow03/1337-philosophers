@@ -6,12 +6,11 @@
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 18:12:47 by mstaali           #+#    #+#             */
-/*   Updated: 2024/06/27 19:49:03 by mstaali          ###   ########.fr       */
+/*   Updated: 2024/06/28 14:15:32 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
-
+#include "philo.h"
 
 int	init_data(t_args *args)
 {
@@ -52,10 +51,10 @@ void	init_forks(t_args *args)
 
 void	init_philos(t_args *args)
 {
-	int i;
+	int	i;
 
 	i = -1;
-	while(++i < args->nbr_of_philos)
+	while (++i < args->nbr_of_philos)
 	{
 		args->philos[i].args = args;
 		args->philos[i].philo_id = i + 1;

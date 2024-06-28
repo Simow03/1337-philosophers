@@ -6,12 +6,11 @@
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 16:14:34 by mstaali           #+#    #+#             */
-/*   Updated: 2024/06/15 16:23:35 by mstaali          ###   ########.fr       */
+/*   Updated: 2024/06/28 14:21:41 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philosophers.h"
-#include <string.h>
+#include "../philo.h"
 
 int	ft_strcmp(const char *s1, const char *s2)
 {
@@ -25,7 +24,7 @@ int	ft_strcmp(const char *s1, const char *s2)
 	while (*s1 && *s2)
 	{
 		if (*s1 != *s2)
-			return *s1 - *s2;
+			return (*s1 - *s2);
 		s1++;
 		s2++;
 	}

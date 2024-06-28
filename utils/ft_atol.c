@@ -6,11 +6,11 @@
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:16:51 by mstaali           #+#    #+#             */
-/*   Updated: 2024/06/12 11:18:21 by mstaali          ###   ########.fr       */
+/*   Updated: 2024/06/28 14:22:59 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philosophers.h"
+#include "../philo.h"
 
 long int	ft_atol(const char *str)
 {
@@ -31,10 +31,10 @@ long int	ft_atol(const char *str)
 		return (nbr_error(str, 0), -1);
 	while (str[i] && ft_isdigit(str[i]))
 	{
-        result = result * 10 + (str[i] - '0');
+		result = result * 10 + (str[i] - '0');
 		if (result > INT_MAX)
 			return (nbr_error(str, 1), -1);
-        i++;
+		i++;
 	}
 	return (result);
 }
