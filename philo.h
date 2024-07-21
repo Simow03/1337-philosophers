@@ -6,7 +6,7 @@
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 15:38:40 by mstaali           #+#    #+#             */
-/*   Updated: 2024/06/28 15:57:24 by mstaali          ###   ########.fr       */
+/*   Updated: 2024/07/21 18:48:13 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,9 @@ typedef struct s_args	t_args;
 //-------------------- STRUCTS --------------------//
 typedef struct s_args
 {
-	pthread_t		*thread_id;
-	t_philo			*philos;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	lock;
 	pthread_mutex_t	write;
-	int				is_finished;
-	int				is_dead;
 	int				nbr_of_philos;
 	long			time_to_die;
 	long			time_to_eat;
@@ -58,26 +54,20 @@ typedef struct s_philo
 	pthread_t		thread;
 	int				philo_id;
 	int				meal_counter;
-	int				is_eating;
-	int				status;
-	long			time_to_die;
-	pthread_mutex_t	*left_fork;
-	pthread_mutex_t	*right_fork;
-	pthread_mutex_t	lock;
+	long			last_meal;
 }	t_philo;
 
 //-------------------- INITS --------------------//
-int			init_data(t_args *args);
 void		init_forks(t_args *args);
-void		init_philos(t_args *args);
+t_philo		*init_philos(t_args *args);
 
 //-------------------- ROUTINE --------------------//
-int			thread_setup(t_args *args);
+int			thread_setup(t_philo *philos, t_args *args);
 long		get_curr_time(void);
 int			ft_usleep(useconds_t time);
 void		*meals_eaten(void	*philo_ptr);
 void		eating_process(t_philo *philo);
-void		print_message(t_philo *philo, char *flag);
+void		print_message(t_philo *philo, char *flag, int unlock);
 void		cleanup(t_args *args);
 
 //-------------------- UTILS --------------------//

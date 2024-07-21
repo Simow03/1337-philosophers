@@ -6,90 +6,88 @@
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 13:53:44 by mstaali           #+#    #+#             */
-/*   Updated: 2024/06/28 15:55:45 by mstaali          ###   ########.fr       */
+/*   Updated: 2024/07/21 18:48:24 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*single_routine(void *philo_ptr)
+void	*routine(void	*philo_ptr)
 {
 	t_philo	*philo;
 
 	philo = (t_philo *)philo_ptr;
-	while (philo->args->is_dead == 0)
+	while (1)
 	{
-		pthread_mutex_lock(&philo->lock);
-		if (get_curr_time() >= philo->time_to_die && philo->is_eating == 0)
-			print_message(philo, DIED);
-		if (philo->meal_counter == philo->args->nbr_of_meals_to_eat)
-		{
-			pthread_mutex_lock(&philo->args->lock);
-			philo->args->is_finished++;
-			philo->meal_counter++;
-			pthread_mutex_unlock(&philo->args->lock);
-		}
-		pthread_mutex_unlock(&philo->lock);
+		eating_process(philo);
+		print_message(philo, SLEEPING, 0);
+		ft_usleep(philo->args->time_to_sleep);
+		print_message(philo, THINKING, 0);
 	}
 	return ((void *)0);
 }
 
-void	*global_routine(void *philo_ptr)
+int	check_meals(t_philo *philos)
 {
-	t_philo	*philo;
+	t_args	*args;
+	int		i;
+	int		count;
 
-	philo = (t_philo *)philo_ptr;
-	philo->time_to_die = philo->args->time_to_die + get_curr_time();
-	if (pthread_create(&philo->thread, NULL, &single_routine, (void *)philo))
-		return (extern_error(1), (void *)0);
-	while (philo->args->is_dead == 0)
-	{
-		eating_process(philo);
-		print_message(philo, THINKING);
-	}
-	if (pthread_join(philo->thread, NULL) != 0)
-		return (extern_error(3), (void *)0);
-	return ((void *)1);
-}
-
-int	handle_one_philo(t_args *args)
-{
-	args->starting_time = get_curr_time();
-	if (pthread_create(&args->thread_id[0], NULL,
-			&global_routine, &args->philos[0]))
-		return (extern_error(1), 0);
-	pthread_detach(args->thread_id[0]);
-	while (args->is_dead == 0)
-		ft_usleep(0);
-	cleanup(args);
-	return (1);
-}
-
-int	thread_setup(t_args *args)
-{
-	int			i;
-	pthread_t	t1;
-
+	args = philos->args;
 	i = -1;
-	if (args->nbr_of_philos == 1)
-		return (handle_one_philo(args));
-	else
+	count = 0;
+	while (++i < args->nbr_of_philos)
 	{
-		args->starting_time = get_curr_time();
-		if (args->nbr_of_meals_to_eat > 0)
-			if (pthread_create(&t1, NULL, &meals_eaten, &args->philos[0]))
-				return (extern_error(1), 0);
-		while (++i < args->nbr_of_philos)
-		{
-			if (pthread_create(&args->thread_id[i], NULL,
-					&global_routine, &args->philos[i]))
-				return (extern_error(1), 0);
-			ft_usleep(1);
-		}
+		pthread_mutex_lock(&args->lock);
+		if (philos[i].meal_counter >= args->nbr_of_meals_to_eat)
+			count++;
+		pthread_mutex_unlock(&args->lock);
+	}
+	if (count == args->nbr_of_philos)
+		return (1);
+	return (0);
+}
+
+void	check_death(t_philo *philos)
+{
+	int		i;
+	t_args	*args;
+
+	args = philos->args;
+	while (1)
+	{
 		i = -1;
 		while (++i < args->nbr_of_philos)
-			if (pthread_join(args->thread_id[i], NULL) != 0)
-				return (extern_error(3), 0);
+		{
+			pthread_mutex_lock(&args->lock);
+			if (get_curr_time() - philos[i].last_meal >= args->time_to_die)
+				return (print_message(philos + i, DIED, 1));
+			pthread_mutex_unlock(&args->lock);
+		}
+		if (args->nbr_of_meals_to_eat > -1 && check_meals(philos))
+			break;
 	}
-	return (cleanup(args), 1);
+}
+
+int	thread_setup(t_philo *philos, t_args *args)
+{
+	int	i;
+
+	args->starting_time = get_curr_time();
+	i = -1;
+	while (++i < args->nbr_of_philos)
+		philos[i].last_meal = get_curr_time();
+	i = -1;
+	while (++i < args->nbr_of_philos)
+	{
+		if (i % 2)
+			usleep(50);
+		if (pthread_create(&philos[i].thread, NULL, routine, (void *)(philos + i)))
+			return (extern_error(1), 0);
+	}
+	i = -1;
+	while (++i < args->nbr_of_philos)
+		pthread_detach(philos[i].thread);
+	check_death(philos);
+	return (1);
 }
