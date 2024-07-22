@@ -12,7 +12,48 @@
 
 #include "philo.h"
 
-t_philo	*init_philos(t_args *args)
+static int	get_args(t_args *args, char **av)
+{
+	args->nbr_of_philos = (int)ft_atol(av[1]);
+	if (args->nbr_of_philos == -1)
+		return (0);
+	args->time_to_die = ft_atol(av[2]);
+	if (args->time_to_die == -1)
+		return (0);
+	args->time_to_eat = ft_atol(av[3]);
+	if (args->time_to_eat == -1)
+		return (0);
+	args->time_to_sleep = ft_atol(av[4]);
+	if (args->time_to_sleep == -1)
+		return (0);
+	if (av[5])
+	{
+		args->nbr_of_meals_to_eat = (int)ft_atol(av[5]);
+		if (args->nbr_of_meals_to_eat == -1)
+			return (0);
+	}
+	else
+		args->nbr_of_meals_to_eat = -2;
+	return (1);
+}
+
+static int	init_data(t_args *args)
+{
+	int	i;
+
+	args->forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t)
+			* args->nbr_of_philos);
+	if (!args->forks)
+		return (extern_error(0), 0);
+	i = -1;
+	while (++i < args->nbr_of_philos)
+		pthread_mutex_init(&args->forks[i], NULL);
+	pthread_mutex_init(&args->write, NULL);
+	pthread_mutex_init(&args->lock, NULL);
+	return (1);
+}
+
+static t_philo	*init_philos(t_args *args)
 {
 	t_philo	*philos;
 	int		i;
@@ -30,45 +71,10 @@ t_philo	*init_philos(t_args *args)
 	return (philos);
 }
 
-static int	get_args(t_args *args, char **av)
-{
-	if ((args->nbr_of_philos = (int)ft_atol(av[1])) == -1)
-		return (0);
-	if ((args->time_to_die = ft_atol(av[2])) == -1)
-		return (0);
-	if ((args->time_to_eat = ft_atol(av[3])) == -1)
-		return (0);
-	if ((args->time_to_sleep = ft_atol(av[4])) == -1)
-		return (0);
-	if (av[5])
-	{
-		if ((args->nbr_of_meals_to_eat = (int)ft_atol(av[5])) == -1)
-			return (0);
-	}
-	else
-		args->nbr_of_meals_to_eat = -2;
-	return (1);
-}
-
-int	init_data(t_args *args)
-{
-	int	i;
-
-	args->forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * args->nbr_of_philos);
-	if (!args->forks)
-		return (extern_error(0), 0);
-	i = -1;
-	while (++i < args->nbr_of_philos)
-		pthread_mutex_init(&args->forks[i], NULL);
-	pthread_mutex_init(&args->write, NULL);
-	pthread_mutex_init(&args->lock, NULL);
-	return (1);
-}
-
 int	main(int ac, char **av)
 {
 	t_args	*args;
-	t_philo *philos;
+	t_philo	*philos;
 
 	if (ac == 5 || ac == 6)
 	{
@@ -79,7 +85,8 @@ int	main(int ac, char **av)
 			return (EXIT_FAILURE);
 		if (!init_data(args))
 			return (EXIT_FAILURE);
-		if (!(philos = init_philos(args)))
+		philos = init_philos(args);
+		if (!philos)
 			return (EXIT_FAILURE);
 		if (!thread_setup(philos, args))
 			return (EXIT_FAILURE);

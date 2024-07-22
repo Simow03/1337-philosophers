@@ -1,18 +1,58 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine.c                                          :+:      :+:    :+:   */
+/*   routine_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/13 13:53:44 by mstaali           #+#    #+#             */
-/*   Updated: 2024/07/21 18:48:24 by mstaali          ###   ########.fr       */
+/*   Created: 2024/06/28 15:52:35 by mstaali           #+#    #+#             */
+/*   Updated: 2024/07/21 18:47:47 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*routine(void	*philo_ptr)
+void	print_message(t_philo *philo, char *flag, int unlock)
+{
+	long	curr_time;
+	t_args	*args;
+
+	args = philo->args;
+	pthread_mutex_lock(&args->write);
+	curr_time = get_curr_time() - args->starting_time;
+	if (ft_strcmp(flag, DIED) == 0)
+		printf("%ld  %d %s%s%s\n", curr_time, philo->philo_id + 1,
+			RED, flag, DFLT);
+	else
+		printf("%ld  %d %s\n", curr_time, philo->philo_id + 1, flag);
+	if (!unlock)
+		pthread_mutex_unlock(&args->write);
+}
+
+void	eating_process(t_philo *philo)
+{
+	t_args	*args;
+	size_t	l_fork_id;
+	size_t	r_fork_id;
+
+	args = philo->args;
+	l_fork_id = philo->philo_id;
+	r_fork_id = (philo->philo_id + 1) % args->nbr_of_philos;
+	pthread_mutex_lock(&args->forks[l_fork_id]);
+	print_message(philo, TAKEN_FORK, 0);
+	pthread_mutex_lock(&args->forks[r_fork_id]);
+	print_message(philo, TAKEN_FORK, 0);
+	print_message(philo, EATING, 0);
+	ft_usleep(args->time_to_eat);
+	pthread_mutex_unlock(&args->forks[l_fork_id]);
+	pthread_mutex_unlock(&args->forks[r_fork_id]);
+	pthread_mutex_lock(&args->lock);
+	philo->meal_counter++;
+	philo->last_meal = get_curr_time();
+	pthread_mutex_unlock(&args->lock);
+}
+
+void	*routine(void *philo_ptr)
 {
 	t_philo	*philo;
 
@@ -25,69 +65,4 @@ void	*routine(void	*philo_ptr)
 		print_message(philo, THINKING, 0);
 	}
 	return ((void *)0);
-}
-
-int	comapre_meals_eaten(t_philo *philos)
-{
-	t_args	*args;
-	int		i;
-	int		count;
-
-	args = philos->args;
-	i = -1;
-	count = 0;
-	while (++i < args->nbr_of_philos)
-	{
-		pthread_mutex_lock(&args->lock);
-		if (philos[i].meal_counter >= args->nbr_of_meals_to_eat)
-			count++;
-		pthread_mutex_unlock(&args->lock);
-	}
-	if (count == args->nbr_of_philos)
-		return (1);
-	return (0);
-}
-
-void	check_death(t_philo *philos)
-{
-	int		i;
-	t_args	*args;
-
-	args = philos->args;
-	while (1)
-	{
-		i = -1;
-		while (++i < args->nbr_of_philos)
-		{
-			pthread_mutex_lock(&args->lock);
-			if (get_curr_time() - philos[i].last_meal >= args->time_to_die)
-				return (print_message(philos + i, DIED, 1));
-			pthread_mutex_unlock(&args->lock);
-		}
-		if (args->nbr_of_meals_to_eat > -1 && comapre_meals_eaten(philos))
-			break;
-	}
-}
-
-int	thread_setup(t_philo *philos, t_args *args)
-{
-	int	i;
-
-	args->starting_time = get_curr_time();
-	i = -1;
-	while (++i < args->nbr_of_philos)
-		philos[i].last_meal = get_curr_time();
-	i = -1;
-	while (++i < args->nbr_of_philos)
-	{
-		if (i % 2)
-			usleep(50);
-		if (pthread_create(&philos[i].thread, NULL, routine, (void *)(philos + i)))
-			return (extern_error(1), 0);
-	}
-	i = -1;
-	while (++i < args->nbr_of_philos)
-		pthread_detach(philos[i].thread);
-	check_death(philos);
-	return (1);
 }
