@@ -4,13 +4,13 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -pthread
 
-SOURCES = main.c routine.c utils/error_handle.c utils/ft_atol.c \
-			utils/ft_isdigit.c utils/ft_iswhitespace.c utils/ft_strcmp.c \
-			utils/time.c routine_utils.c
+SOURCES = main.c routine.c thread_setup.c ../utils/error_handle.c ../utils/ft_atol.c \
+			../utils/ft_isdigit.c ../utils/ft_iswhitespace.c ../utils/ft_strcmp.c \
+			../utils/time.c
 
 OBJECTS = $(SOURCES:.c=.o)
 
-%.o : %.c philosophers.h
+%.o : %.c philo.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 all : $(NAME)

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "../philo/philo.h"
 
 long int	ft_atol(const char *str)
 {

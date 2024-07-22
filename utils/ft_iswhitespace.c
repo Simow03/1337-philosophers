@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "../philo/philo.h"
 
 int	ft_iswhitespace(int c)
 {
