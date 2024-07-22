@@ -31,16 +31,20 @@ void	print_message(t_philo *philo, char *flag, int unlock)
 void	eating_process(t_philo *philo)
 {
 	t_args	*args;
+	size_t	l_fork_id;
+	size_t	r_fork_id;
 
 	args = philo->args;
-	pthread_mutex_lock(&args->forks[philo->philo_id]);
+	l_fork_id = philo->philo_id;
+	r_fork_id = (philo->philo_id + 1) % args->nbr_of_philos;
+	pthread_mutex_lock(&args->forks[l_fork_id]);
 	print_message(philo, TAKEN_FORK, 0);
-	pthread_mutex_lock(&args->forks[(philo->philo_id + 1) % args->nbr_of_philos]);
+	pthread_mutex_lock(&args->forks[r_fork_id]);
 	print_message(philo, TAKEN_FORK, 0);
 	print_message(philo, EATING, 0);
 	ft_usleep(args->time_to_eat);
-	pthread_mutex_unlock(&args->forks[philo->philo_id]);
-	pthread_mutex_unlock(&args->forks[(philo->philo_id + 1) % args->nbr_of_philos]);
+	pthread_mutex_unlock(&args->forks[l_fork_id]);
+	pthread_mutex_unlock(&args->forks[r_fork_id]);
 	pthread_mutex_lock(&args->lock);
 	philo->meal_counter++;
 	philo->last_meal = get_curr_time();

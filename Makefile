@@ -2,7 +2,7 @@ NAME = philo
 
 CC = cc
 
-CFLAGS = -fsanitize=address -Wall -Wextra -Werror -pthread
+CFLAGS = -Wall -Wextra -Werror -pthread
 
 SOURCES = main.c routine.c utils/error_handle.c utils/ft_atol.c \
 			utils/ft_isdigit.c utils/ft_iswhitespace.c utils/ft_strcmp.c \

@@ -19,34 +19,34 @@ t_philo	*init_philos(t_args *args)
 
 	philos = (t_philo *)malloc(sizeof(t_philo) * args->nbr_of_philos);
 	if (!philos)
-		return (NULL);
+		return (extern_error(0), NULL);
 	i = -1;
 	while (++i < args->nbr_of_philos)
 	{
 		philos[i].philo_id = i;
 		philos[i].args = args;
+		philos[i].meal_counter = 0;
 	}
 	return (philos);
 }
 
-void	get_args(t_args *args, char **av)
+static int	get_args(t_args *args, char **av)
 {
-	args->nbr_of_philos = (int)ft_atol(av[1]);
-	args->time_to_die = ft_atol(av[2]);
-	args->time_to_eat = ft_atol(av[3]);
-	args->time_to_sleep = ft_atol(av[4]);
+	if ((args->nbr_of_philos = (int)ft_atol(av[1])) == -1)
+		return (0);
+	if ((args->time_to_die = ft_atol(av[2])) == -1)
+		return (0);
+	if ((args->time_to_eat = ft_atol(av[3])) == -1)
+		return (0);
+	if ((args->time_to_sleep = ft_atol(av[4])) == -1)
+		return (0);
 	if (av[5])
-		args->nbr_of_meals_to_eat = (int)ft_atol(av[5]);
+	{
+		if ((args->nbr_of_meals_to_eat = (int)ft_atol(av[5])) == -1)
+			return (0);
+	}
 	else
 		args->nbr_of_meals_to_eat = -2;
-}
-
-int	is_valid_args(t_args *args)
-{
-	if (args->nbr_of_philos == -1 || args->nbr_of_philos == 0
-		|| args->time_to_die == -1 || args->time_to_eat == -1
-		|| args->time_to_sleep == -1 || args->nbr_of_meals_to_eat == -1)
-		return (0);
 	return (1);
 }
 
@@ -74,14 +74,12 @@ int	main(int ac, char **av)
 	{
 		args = (t_args *)malloc(sizeof(t_args));
 		if (!args)
-			return (EXIT_FAILURE);
-		get_args(args, av);
-		if (!is_valid_args(args))
+			return (extern_error(0), EXIT_FAILURE);
+		if (!get_args(args, av))
 			return (EXIT_FAILURE);
 		if (!init_data(args))
 			return (EXIT_FAILURE);
-		philos = init_philos(args);
-		if (!philos)
+		if (!(philos = init_philos(args)))
 			return (EXIT_FAILURE);
 		if (!thread_setup(philos, args))
 			return (EXIT_FAILURE);

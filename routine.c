@@ -27,7 +27,7 @@ void	*routine(void	*philo_ptr)
 	return ((void *)0);
 }
 
-int	check_meals(t_philo *philos)
+int	comapre_meals_eaten(t_philo *philos)
 {
 	t_args	*args;
 	int		i;
@@ -64,7 +64,7 @@ void	check_death(t_philo *philos)
 				return (print_message(philos + i, DIED, 1));
 			pthread_mutex_unlock(&args->lock);
 		}
-		if (args->nbr_of_meals_to_eat > -1 && check_meals(philos))
+		if (args->nbr_of_meals_to_eat > -1 && comapre_meals_eaten(philos))
 			break;
 	}
 }
