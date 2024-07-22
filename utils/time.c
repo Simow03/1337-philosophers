@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 15:13:22 by mstaali           #+#    #+#             */
-/*   Updated: 2024/06/28 14:15:38 by mstaali          ###   ########.fr       */
+/*   Updated: 2024/07/22 15:44:36 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo/philo.h"
+#include "../philo_bonus/philo_bonus.h"
 
 long	get_curr_time(void)
 {

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_iswhitespace.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:15:02 by mstaali           #+#    #+#             */
-/*   Updated: 2024/06/28 14:22:22 by mstaali          ###   ########.fr       */
+/*   Updated: 2024/07/22 15:44:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo/philo.h"
+#include "../philo_bonus/philo_bonus.h"
 
 int	ft_iswhitespace(int c)
 {

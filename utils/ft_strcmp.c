@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 16:14:34 by mstaali           #+#    #+#             */
-/*   Updated: 2024/06/28 14:21:41 by mstaali          ###   ########.fr       */
+/*   Updated: 2024/07/22 15:44:32 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo/philo.h"
+#include "../philo_bonus/philo_bonus.h"
 
 int	ft_strcmp(const char *s1, const char *s2)
 {

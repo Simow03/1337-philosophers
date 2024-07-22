@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:15:56 by mstaali           #+#    #+#             */
-/*   Updated: 2024/06/28 14:15:55 by mstaali          ###   ########.fr       */
+/*   Updated: 2024/07/22 15:44:25 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo/philo.h"
+#include "../philo_bonus/philo_bonus.h"
 
 int	ft_isdigit(int c)
 {
