@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:16:51 by mstaali           #+#    #+#             */
-/*   Updated: 2024/07/22 15:44:21 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/23 17:32:00 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ long int	ft_atol(const char *str)
 	result = 0;
 	if (!ft_isdigit(str[i]))
 		return (nbr_error(str, 0), -1);
-	while (str[i] && ft_isdigit(str[i]))
+	while (str[i])
 	{
+		if (!ft_isdigit(str[i]))
+			return (nbr_error(str, 0), -1);
 		result = result * 10 + (str[i] - '0');
 		if (result > INT_MAX)
 			return (nbr_error(str, 1), -1);
