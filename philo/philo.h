@@ -57,22 +57,17 @@ typedef struct s_philo
 	long			last_meal;
 }	t_philo;
 
-//-------------------- INITS --------------------//
-void		init_forks(t_args *args);
-t_philo		*init_philos(t_args *args);
-
 //-------------------- ROUTINE --------------------//
 int			thread_setup(t_philo *philos, t_args *args);
-long		get_curr_time(void);
-int			ft_usleep(useconds_t time);
-void		*meals_eaten(void	*philo_ptr);
+void		*routine(void *philo_ptr);
 void		eating_process(t_philo *philo);
 void		print_message(t_philo *philo, char *flag, int unlock);
-void		cleanup(t_args *args);
 
 //-------------------- UTILS --------------------//
 long int	ft_atol(const char *str);
 int			ft_isdigit(int c);
+long		get_curr_time(void);
+int			ft_usleep(useconds_t time);
 int			ft_iswhitespace(int c);
 int			ft_strcmp(const char *s1, const char *s2);
 void		args_error(void);

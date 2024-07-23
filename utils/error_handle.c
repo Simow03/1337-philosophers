@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/12 11:13:54 by mstaali           #+#    #+#             */
-/*   Updated: 2024/06/28 16:17:39 by mstaali          ###   ########.fr       */
+/*   Created: 2024/07/23 20:13:55 by mstaali           #+#    #+#             */
+/*   Updated: 2024/07/23 20:13:57 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "../philo/philo.h"
+#include "../philo_bonus/philo_bonus.h"
 
 void	args_error(void)
 {

@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/15 16:14:34 by mstaali           #+#    #+#             */
-/*   Updated: 2024/06/28 14:21:41 by mstaali          ###   ########.fr       */
+/*   Created: 2024/07/23 20:14:16 by mstaali           #+#    #+#             */
+/*   Updated: 2024/07/23 20:14:17 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "../philo/philo.h"
+#include "../philo_bonus/philo_bonus.h"
 
 int	ft_strcmp(const char *s1, const char *s2)
 {

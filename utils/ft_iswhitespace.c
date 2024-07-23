@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/12 11:15:02 by mstaali           #+#    #+#             */
-/*   Updated: 2024/06/28 14:22:22 by mstaali          ###   ########.fr       */
+/*   Created: 2024/07/23 20:14:11 by mstaali           #+#    #+#             */
+/*   Updated: 2024/07/23 20:14:13 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "../philo/philo.h"
+#include "../philo_bonus/philo_bonus.h"
 
 int	ft_iswhitespace(int c)
 {

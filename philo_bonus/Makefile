@@ -1,16 +1,16 @@
-NAME = philo
+NAME = philo_bonus
 
 CC = cc
 
-CFLAGS = -fsanitize=address -Wall -Wextra -Werror -pthread
+CFLAGS = -Wall -Wextra -Werror -pthread
 
-SOURCES = main.c routine.c utils/error_handle.c utils/ft_atol.c \
-			utils/ft_isdigit.c utils/ft_iswhitespace.c utils/ft_strcmp.c \
-			utils/time.c routine_utils.c
+SOURCES = main.c ../utils/error_handle.c ../utils/ft_atol.c \
+			../utils/ft_isdigit.c ../utils/ft_iswhitespace.c ../utils/ft_strcmp.c \
+			../utils/time.c
 
 OBJECTS = $(SOURCES:.c=.o)
 
-%.o : %.c philosophers.h
+%.o : %.c philo_bonus.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 all : $(NAME)

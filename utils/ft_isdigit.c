@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/12 11:15:56 by mstaali           #+#    #+#             */
-/*   Updated: 2024/06/28 14:15:55 by mstaali          ###   ########.fr       */
+/*   Created: 2024/07/23 20:14:06 by mstaali           #+#    #+#             */
+/*   Updated: 2024/07/23 20:14:08 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "../philo/philo.h"
+#include "../philo_bonus/philo_bonus.h"
 
 int	ft_isdigit(int c)
 {

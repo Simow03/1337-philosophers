@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/13 15:13:22 by mstaali           #+#    #+#             */
-/*   Updated: 2024/07/21 20:40:04 by mstaali          ###   ########.fr       */
+/*   Created: 2024/07/23 20:14:21 by mstaali           #+#    #+#             */
+/*   Updated: 2024/07/23 20:14:22 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "../philo/philo.h"
+#include "../philo_bonus/philo_bonus.h"
 
 long	get_curr_time(void)
 {
