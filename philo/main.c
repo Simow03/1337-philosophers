@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 18:09:39 by mstaali           #+#    #+#             */
-/*   Updated: 2024/07/21 18:59:38 by mstaali          ###   ########.fr       */
+/*   Updated: 2024/07/23 17:27:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	get_args(t_args *args, char **av)
 {
 	args->nbr_of_philos = (int)ft_atol(av[1]);
-	if (args->nbr_of_philos == -1)
+	if (args->nbr_of_philos <= 0)
 		return (0);
 	args->time_to_die = ft_atol(av[2]);
 	if (args->time_to_die == -1)
