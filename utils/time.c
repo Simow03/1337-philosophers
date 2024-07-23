@@ -6,7 +6,7 @@
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 15:13:22 by mstaali           #+#    #+#             */
-/*   Updated: 2024/06/28 14:15:38 by mstaali          ###   ########.fr       */
+/*   Updated: 2024/07/21 20:40:04 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ int	ft_usleep(useconds_t time)
 
 	start = get_curr_time();
 	while ((get_curr_time() - start) < time)
-		usleep(time / 10);
+		usleep(50);
 	return (0);
 }
