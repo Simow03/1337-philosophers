@@ -12,7 +12,7 @@
 
 #include "philo_bonus.h"
 
-static void get_args(t_args *args, char **av)
+static void	get_args(t_b_args *args, char **av)
 {
 	args->nbr_of_philos = (int)ft_atol(av[1]);
 	if (args->nbr_of_philos <= 0)
@@ -36,18 +36,52 @@ static void get_args(t_args *args, char **av)
 		args->nbr_of_meals_to_eat = -2;
 }
 
+static void	init_data(t_b_args *args)
+{
+	sem_unlink("/forks");
+	sem_unlink("/write");
+	sem_unlink("/lock");
+	args->forks = sem_open("/forks", O_CREAT, 0600, args->nbr_of_philos);
+	args->write = sem_open("/write", O_CREAT, 0600, 1);
+	args->lock = sem_open("/lock", O_CREAT, 0600, 1);
+}
+
+static t_b_philo	*init_philos(t_b_args *args)
+{
+	t_b_philo	*philos;
+	int		i;
+
+	philos = (t_b_philo *)malloc(sizeof(t_b_philo) * args->nbr_of_philos);
+	if (!philos)
+		return (extern_error(0), NULL);
+	i = -1;
+	while (++i < args->nbr_of_philos)
+	{
+		philos[i].philo_id = i;
+		philos[i].args = args;
+		philos[i].meal_counter = 0;
+	}
+	return (philos);
+}
+
 int	main(int ac, char **av)
 {
-	t_args	*args;
-	t_philo	*philos;
+	t_b_args	*args;
+	t_b_philo	*philos;
 
     (void)philos;
 	if (ac == 5 || ac == 6)
 	{
-		args = (t_args *)malloc(sizeof(t_args));
+		args = (t_b_args *)malloc(sizeof(t_b_args));
 		if (!args)
 			return (extern_error(0), EXIT_FAILURE);
 		get_args(args, av);
+		init_data(args);
+		philos = init_philos(args);
+		if (!philos)
+			exit(EXIT_FAILURE);
+		process_setup(philos, args);
+		kill_process(philos, args);
 	}
 	else
 		return (args_error(), EXIT_FAILURE);
