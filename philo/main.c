@@ -6,7 +6,7 @@
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 20:13:11 by mstaali           #+#    #+#             */
-/*   Updated: 2024/07/23 20:13:17 by mstaali          ###   ########.fr       */
+/*   Updated: 2024/07/29 12:45:04 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,17 @@ static t_philo	*init_philos(t_args *args)
 	return (philos);
 }
 
+void f()
+{
+	system("leaks philo_bonus");
+}
+
 int	main(int ac, char **av)
 {
 	t_args	*args;
 	t_philo	*philos;
 
+	atexit(f);
 	if (ac == 5 || ac == 6)
 	{
 		args = (t_args *)malloc(sizeof(t_args));
@@ -90,6 +96,9 @@ int	main(int ac, char **av)
 			return (EXIT_FAILURE);
 		if (!thread_setup(philos, args))
 			return (EXIT_FAILURE);
+		free(args->forks);
+		free(args);
+		free(philos);
 		return (EXIT_SUCCESS);
 	}
 	else
