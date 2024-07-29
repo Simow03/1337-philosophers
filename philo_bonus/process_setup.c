@@ -6,7 +6,7 @@
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 11:59:48 by mstaali           #+#    #+#             */
-/*   Updated: 2024/07/29 09:58:49 by mstaali          ###   ########.fr       */
+/*   Updated: 2024/07/29 12:04:30 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	kill_process(t_b_philo *philos, t_b_args *args)
 	i = -1;
 	while (++i < args->nbr_of_philos)
 		kill(philos[i].pid, SIGKILL);
-	sem_unlink("forks");
-	sem_unlink("write");
-	sem_unlink("lock");
+	sem_unlink("/forks");
+	sem_unlink("/write");
+	sem_unlink("/lock");
 	sem_close(args->forks);
 	sem_close(args->write);
 	sem_close(args->lock);

@@ -64,11 +64,17 @@ static t_b_philo	*init_philos(t_b_args *args)
 	return (philos);
 }
 
+void f()
+{
+	system("leaks philo_bonus");
+}
+
 int	main(int ac, char **av)
 {
 	t_b_args	*args;
 	t_b_philo	*philos;
 
+	atexit(f);
 	if (ac == 5 || ac == 6)
 	{
 		args = (t_b_args *)malloc(sizeof(t_b_args));
@@ -82,6 +88,8 @@ int	main(int ac, char **av)
 		args->starting_time = get_curr_time();
 		process_setup(philos, args);
 		kill_process(philos, args);
+		free(args);
+		free(philos);
 	}
 	else
 		return (args_error(), EXIT_FAILURE);
