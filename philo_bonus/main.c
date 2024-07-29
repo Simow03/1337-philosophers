@@ -48,8 +48,8 @@ static void	init_data(t_b_args *args)
 
 static t_b_philo	*init_philos(t_b_args *args)
 {
+	int			i;
 	t_b_philo	*philos;
-	int		i;
 
 	philos = (t_b_philo *)malloc(sizeof(t_b_philo) * args->nbr_of_philos);
 	if (!philos)
@@ -69,7 +69,6 @@ int	main(int ac, char **av)
 	t_b_args	*args;
 	t_b_philo	*philos;
 
-    (void)philos;
 	if (ac == 5 || ac == 6)
 	{
 		args = (t_b_args *)malloc(sizeof(t_b_args));
@@ -80,6 +79,7 @@ int	main(int ac, char **av)
 		philos = init_philos(args);
 		if (!philos)
 			exit(EXIT_FAILURE);
+		args->starting_time = get_curr_time();
 		process_setup(philos, args);
 		kill_process(philos, args);
 	}

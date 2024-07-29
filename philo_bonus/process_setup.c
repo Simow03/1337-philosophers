@@ -6,7 +6,7 @@
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 11:59:48 by mstaali           #+#    #+#             */
-/*   Updated: 2024/07/24 12:53:38 by mstaali          ###   ########.fr       */
+/*   Updated: 2024/07/29 09:58:49 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ static void	check_death(t_b_philo *philos)
 		sem_wait(args->lock);
 		if (get_curr_time() - philos->last_meal >= args->time_to_die)
 			return (print_message_bonus(philos, DIED, 1));
-		if (args->nbr_of_meals_to_eat > -1 && philos->meal_counter > args->nbr_of_meals_to_eat)
+		if (args->nbr_of_meals_to_eat > -1
+			&& philos->meal_counter > args->nbr_of_meals_to_eat)
 			break ;
 		sem_post(args->lock);
 	}
@@ -47,7 +48,6 @@ void	process_setup(t_b_philo *philos, t_b_args *args)
 {
 	int	i;
 
-	args->starting_time = get_curr_time();
 	i = -1;
 	while (++i < args->nbr_of_philos)
 	{
