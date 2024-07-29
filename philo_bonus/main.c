@@ -84,7 +84,10 @@ int	main(int ac, char **av)
 		init_data(args);
 		philos = init_philos(args);
 		if (!philos)
+		{
+			free(args);
 			exit(EXIT_FAILURE);
+		}
 		args->starting_time = get_curr_time();
 		process_setup(philos, args);
 		kill_process(philos, args);

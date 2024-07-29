@@ -6,7 +6,7 @@
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 20:13:11 by mstaali           #+#    #+#             */
-/*   Updated: 2024/07/29 12:45:04 by mstaali          ###   ########.fr       */
+/*   Updated: 2024/07/29 13:09:35 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,34 +71,25 @@ static t_philo	*init_philos(t_args *args)
 	return (philos);
 }
 
-void f()
-{
-	system("leaks philo_bonus");
-}
-
 int	main(int ac, char **av)
 {
 	t_args	*args;
 	t_philo	*philos;
 
-	atexit(f);
 	if (ac == 5 || ac == 6)
 	{
 		args = (t_args *)malloc(sizeof(t_args));
 		if (!args)
 			return (extern_error(0), EXIT_FAILURE);
 		if (!get_args(args, av))
-			return (EXIT_FAILURE);
+			return (free(args), EXIT_FAILURE);
 		if (!init_data(args))
-			return (EXIT_FAILURE);
+			return (free(args), EXIT_FAILURE);
 		philos = init_philos(args);
 		if (!philos)
-			return (EXIT_FAILURE);
+			return (free(args->forks), free(args), EXIT_FAILURE);
 		if (!thread_setup(philos, args))
-			return (EXIT_FAILURE);
-		free(args->forks);
-		free(args);
-		free(philos);
+			return (free(args->forks), free(args), free(philos), EXIT_FAILURE);
 		return (EXIT_SUCCESS);
 	}
 	else
