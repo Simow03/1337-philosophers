@@ -1,0 +1,35 @@
+Threads :
+
+- Threads are units of execution within a process.
+- Lightweight.
+- Shared resources within a process.
+- Allows parallel execution of multiple threads within a single process.
+- Uses synchronization mechanisms (like mutexes, semaphores) to prevent race conditions and deadlocks.
+
+DeadLocks :
+
+- Deadlock occurs when two or more threads are unable to proceed because each is waiting for the other to release a resource.
+
+Race Conditions :
+
+- Race condition occurs when the behavior of a program depends on the relative timing of events, especially when multiple threads access shared data.
+
+Mutexes :
+
+- Short for mutual exclusion, is a program object that prevents multiple threads from simultaneously accessing a shared resource.
+- Lock : A thread acquires the mutex before accessing the shared resource.
+- Unlock : The thread releases the mutex after finishing with the resource.
+- Only one thread can hold the mutex at a time.
+
+Semaphores : 
+
+- Semaphore is an abstract data type used to control access to a common resource by multiple threads and avoid critical section problems.
+- Wait : Decrements the semaphore value ; if the value becomes negative, the thread blocks.
+- Post : Increments the semaphore value ; if threads are waiting, one is unblocked.
+- Control access to a shared resource with multiple instances.
+- Synchronize thread execution.
+
+Mutex vs Semaphore :
+
+- Semaphores can allow multiple threads to access a resource ; mutexes are for exclusive access.
+- Any thread can typically release a semaphore ; with mutexes, the locking thread should be the one to unlock.
