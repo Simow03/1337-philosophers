@@ -64,17 +64,11 @@ static t_b_philo	*init_philos(t_b_args *args)
 	return (philos);
 }
 
-void f()
-{
-	system("leaks philo_bonus");
-}
-
 int	main(int ac, char **av)
 {
 	t_b_args	*args;
 	t_b_philo	*philos;
 
-	atexit(f);
 	if (ac == 5 || ac == 6)
 	{
 		args = (t_b_args *)malloc(sizeof(t_b_args));
