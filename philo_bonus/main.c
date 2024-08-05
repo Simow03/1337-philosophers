@@ -29,7 +29,7 @@ static void	get_args(t_b_args *args, char **av)
 	if (av[5])
 	{
 		args->nbr_of_meals_to_eat = (int)ft_atol(av[5]);
-		if (args->nbr_of_meals_to_eat == -1)
+		if (args->nbr_of_meals_to_eat <= 0)
 			exit(EXIT_FAILURE);
 	}
 	else

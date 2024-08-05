@@ -6,7 +6,7 @@
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 20:13:11 by mstaali           #+#    #+#             */
-/*   Updated: 2024/07/29 13:09:35 by mstaali          ###   ########.fr       */
+/*   Updated: 2024/08/05 23:16:36 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	get_args(t_args *args, char **av)
 	if (av[5])
 	{
 		args->nbr_of_meals_to_eat = (int)ft_atol(av[5]);
-		if (args->nbr_of_meals_to_eat == -1)
+		if (args->nbr_of_meals_to_eat <= 0)
 			return (0);
 	}
 	else
