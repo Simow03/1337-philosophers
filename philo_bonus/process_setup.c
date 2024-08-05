@@ -6,7 +6,7 @@
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 11:59:48 by mstaali           #+#    #+#             */
-/*   Updated: 2024/08/02 18:07:37 by mstaali          ###   ########.fr       */
+/*   Updated: 2024/08/05 13:20:22 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,18 @@ void	process_setup(t_b_philo *philos, t_b_args *args)
 	while (++i < args->nbr_of_philos)
 	{
 		philos[i].pid = fork();
-		if (i % 2)
-			usleep(50);
 		if (!philos[i].pid)
 		{
 			philos[i].last_meal = get_curr_time();
-			if (pthread_create(&philos[i].thread, NULL, routine, (void *)(philos + i)))
-				return ;
-			pthread_detach(philos[i].thread);
+			if (pthread_create(&philos[i].thread,
+					NULL, routine, (void *)(philos + i)))
+				return (extern_error(1));
+			if (pthread_detach(philos[i].thread))
+				return (extern_error(2));
 			check_death(&philos[i]);
-			exit(0);
+			exit(EXIT_SUCCESS);
 		}
+		usleep(50);
 	}
 	waitpid(-1, NULL, 0);
 }

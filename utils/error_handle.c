@@ -6,7 +6,7 @@
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 20:13:55 by mstaali           #+#    #+#             */
-/*   Updated: 2024/07/23 20:13:57 by mstaali          ###   ########.fr       */
+/*   Updated: 2024/08/05 12:42:57 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,6 @@ void	extern_error(int flag)
 		printf("\n%s%s%serror:%s%s Failed to detach thread.\n\n",
 			BOLD, UNDERLINE, RED, DFLT, BOLD);
 	else if (flag == 3)
-		printf("\n%s%s%serror:%s%s Failed to join thread.\n\n",
-			BOLD, UNDERLINE, RED, DFLT, BOLD);
-	else if (flag == 4)
 		printf("\n%s%s%serror:%s%s Failed to \'gettimeofday()\'.\n\n",
 			BOLD, UNDERLINE, RED, DFLT, BOLD);
 }

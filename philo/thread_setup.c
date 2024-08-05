@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine.c                                          :+:      :+:    :+:   */
+/*   thread_setup.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 13:53:44 by mstaali           #+#    #+#             */
-/*   Updated: 2024/07/21 18:48:24 by mstaali          ###   ########.fr       */
+/*   Updated: 2024/08/05 13:21:09 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,15 @@ int	thread_setup(t_philo *philos, t_args *args)
 	i = -1;
 	while (++i < args->nbr_of_philos)
 	{
-		if (i % 2)
-			usleep(50);
 		if (pthread_create(&philos[i].thread, NULL,
 				routine, (void *)(philos + i)))
 			return (extern_error(1), 0);
+		usleep(50);
 	}
 	i = -1;
 	while (++i < args->nbr_of_philos)
-		pthread_detach(philos[i].thread);
+		if (pthread_detach(philos[i].thread))
+			return (extern_error(2), 0);
 	check_death(philos);
 	return (1);
 }
