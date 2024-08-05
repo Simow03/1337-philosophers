@@ -33,3 +33,10 @@ Mutex vs Semaphore :
 
 - Semaphores can allow multiple threads to access a resource ; mutexes are for exclusive access.
 - Any thread can typically release a semaphore ; with mutexes, the locking thread should be the one to unlock.
+
+pthread_detach vs pthread_join :
+
+- Join waits for the specified thread to terminate, detach does not.
+- Can't pthread_join a detached thread.
+- You can only collect a thread's return value with pthread_join.
+- Detached threads free their resources immediately upon completion, while joined ones require manual cleanup.
