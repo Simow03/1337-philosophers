@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atol.c                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/23 20:14:00 by mstaali           #+#    #+#             */
-/*   Updated: 2024/07/23 20:14:02 by mstaali          ###   ########.fr       */
+/*   Created: 2024/09/09 12:07:40 by mstaali           #+#    #+#             */
+/*   Updated: 2024/09/09 12:09:04 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo/philo.h"
-#include "../philo_bonus/philo_bonus.h"
+#include "philo_bonus.h"
 
 long int	ft_atol(const char *str)
 {
@@ -40,4 +39,36 @@ long int	ft_atol(const char *str)
 		i++;
 	}
 	return (result);
+}
+
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	if (!s1 || !s2)
+	{
+		if (s1 == NULL && s2 == NULL)
+			return (0);
+		else
+			return (-1);
+	}
+	while (*s1 && *s2)
+	{
+		if (*s1 != *s2)
+			return (*s1 - *s2);
+		s1++;
+		s2++;
+	}
+	return (*s1 - *s2);
+}
+
+int	ft_iswhitespace(int c)
+{
+	return (c == ' ' || c == '\t' || c == '\n' || c == '\r'
+		|| c == '\v' || c == '\f');
+}
+
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }

@@ -6,12 +6,11 @@
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 20:13:55 by mstaali           #+#    #+#             */
-/*   Updated: 2024/08/05 12:42:57 by mstaali          ###   ########.fr       */
+/*   Updated: 2024/09/09 12:05:55 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo/philo.h"
-#include "../philo_bonus/philo_bonus.h"
+#include "philo_bonus.h"
 
 void	args_error(void)
 {

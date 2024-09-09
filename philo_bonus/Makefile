@@ -4,8 +4,7 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -pthread
 
-SOURCES = main.c process_setup.c routine.c ../utils/error_handle.c ../utils/ft_atol.c \
-			../utils/ft_iswhitespace.c ../utils/ft_strcmp.c ../utils/time.c ../utils/ft_isdigit.c\
+SOURCES = main.c process_setup.c routine.c error_handle.c time.c utils.c\
 
 OBJECTS = $(SOURCES:.c=.o)
 
