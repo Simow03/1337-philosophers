@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine_utils.c                                    :+:      :+:    :+:   */
+/*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 15:52:35 by mstaali           #+#    #+#             */
-/*   Updated: 2024/07/21 18:47:47 by mstaali          ###   ########.fr       */
+/*   Updated: 2024/10/12 18:03:51 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ void	eating_process(t_philo *philo)
 	pthread_mutex_lock(&args->forks[r_fork_id]);
 	print_message(philo, TAKEN_FORK, 0);
 	print_message(philo, EATING, 0);
+	philo->last_meal = get_curr_time();
 	ft_usleep(args->time_to_eat);
 	pthread_mutex_unlock(&args->forks[l_fork_id]);
 	pthread_mutex_unlock(&args->forks[r_fork_id]);
 	pthread_mutex_lock(&args->lock);
 	philo->meal_counter++;
-	philo->last_meal = get_curr_time();
 	pthread_mutex_unlock(&args->lock);
 }
 

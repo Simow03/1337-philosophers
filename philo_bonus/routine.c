@@ -6,7 +6,7 @@
 /*   By: mstaali <mstaali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 15:52:35 by mstaali           #+#    #+#             */
-/*   Updated: 2024/08/05 12:54:05 by mstaali          ###   ########.fr       */
+/*   Updated: 2024/10/12 18:04:45 by mstaali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ void	eating_process_bonus(t_b_philo *philo)
 	sem_wait(args->forks);
 	print_message_bonus(philo, TAKEN_FORK, 0);
 	print_message_bonus(philo, EATING, 0);
+	philo->last_meal = get_curr_time();
 	ft_usleep(args->time_to_eat);
 	sem_post(args->forks);
 	sem_post(args->forks);
 	sem_wait(args->lock);
 	philo->meal_counter++;
-	philo->last_meal = get_curr_time();
 	sem_post(args->lock);
 }
 
